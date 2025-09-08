@@ -3,7 +3,7 @@ import Navbar from './Components/Navbar/navbar.jsx';
 import Career from './Components/Career/Career.jsx';
 import Home from './Components/Home/Home.jsx';
 import Footer from './Components/Footer/Footer.jsx';
-import Blog from './Components/Blog/BLog.jsx';
+import Blog from './Components/Blog/Blog.jsx';
 
 const App = () => {
   return (
