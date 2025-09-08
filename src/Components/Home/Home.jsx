@@ -4,7 +4,8 @@ import Features from './Features/Features.jsx'
 import Solution from './Solutions/Solution.jsx'
 import Outcomes from './Outcomes/Outcomes.jsx'
 import Proof from './Proof/Proof.jsx'
-import Cta from './Cta/Cta.jsx'
+import Call from './Call/Call.jsx'
+
 
 export const Home = () => {
   return (
@@ -14,7 +15,7 @@ export const Home = () => {
       <section id='Solution'> <Solution /> </section>
       <section id='Outcomes'> <Outcomes /> </section>
       <section id='Proof'> <Proof /> </section>
-      <section id='Cta'> <Cta /> </section>
+      <section id='Call'> <Call /> </section>
     </div>
   )
 }

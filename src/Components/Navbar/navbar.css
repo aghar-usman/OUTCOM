@@ -1,8 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Tektur:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tektur:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --text-primary: #ffffff;
+  --text-secondary: #d1d5db;
+  --accent-primary: #6366f1;
+  --accent-secondary: #8b5cf6;
+  --white: #ffffff;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.16), 0 2px 4px rgba(0, 0, 0, 0.12);
+  --radius-sm: 8px;
+  --transition: all 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 .navbar-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
   position: fixed;
@@ -11,12 +29,12 @@
   z-index: 10000;
   gap: 1rem;
   background-color: transparent;
-  transition: all 0.3s ease;
+  transition: var(--transition);
 }
 
 .navbar-container.scrolled {
-  padding: 0.5rem 2rem;
-  background-color: rgba(17, 24, 39, 0.9);
+  padding: 0.75rem 2rem;
+  background-color: rgba(17, 24, 39, 0.95);
   backdrop-filter: blur(10px);
 }
 
@@ -29,7 +47,7 @@
   display: flex;
   align-items: center;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
+  transition: var(--transition);
 }
 
 .nav-bubble:hover {
@@ -54,11 +72,12 @@
   font-weight: 700;
   margin: 0;
   white-space: nowrap;
-  font-family: 'Tektur', sans-serif;
+  font-family: 'Tektur', cursive;
   background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  letter-spacing: -0.5px;
 }
 
 .links-bubble {
@@ -80,11 +99,12 @@
   text-decoration: none;
   font-weight: 500;
   font-size: 0.95rem;
-  transition: all 0.3s ease;
+  transition: var(--transition);
   padding: 0.5rem 0;
   position: relative;
   white-space: nowrap;
-  font-family: tektur, sans-serif;
+  font-family: 'Tektur', monospace;
+  letter-spacing: -0.3px;
 }
 
 .nav-link:hover {
@@ -117,16 +137,17 @@
   padding: 0.5rem 1.25rem;
   border-radius: 50px;
   text-decoration: none;
-  font-weight: 500;
-  transition: all 0.3s ease;
+  font-weight: 600;
+  transition: var(--transition);
   font-size: 0.95rem;
-  font-family: Tektur, sans-serif;
+  font-family: 'Tektur', monospace;
   border: none;
   cursor: pointer;
   box-shadow: var(--shadow-sm);
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  letter-spacing: -0.3px;
 }
 
 .waitlist-btn:hover {
@@ -154,16 +175,20 @@
 
 .hamburger-bubble {
   padding: 0.75rem;
+  background-color: rgba(31, 41, 55, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .hamburger {
   background: none;
   border: none;
   color: var(--text-primary);
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   cursor: pointer;
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -181,7 +206,7 @@
   left: 0;
   width: 100%;
   height: 100vh;
-  background: rgba(17, 24, 39, 0.95);
+  background: rgba(17, 24, 39, 0.98);
   backdrop-filter: blur(10px);
   z-index: 999;
   display: flex;
@@ -191,6 +216,7 @@
   opacity: 0;
   visibility: hidden;
   transition: var(--transition);
+  padding: 2rem;
 }
 
 .mobile-menu.active {
@@ -201,29 +227,81 @@
 .mobile-nav-links {
   list-style: none;
   padding: 0;
-  margin: 0 0 2rem 0;
+  margin: 0 0 3rem 0;
   text-align: center;
+  width: 100%;
 }
 
 .mobile-nav-links li {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
+.mobile-menu.active .mobile-nav-links li {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mobile-nav-links li:nth-child(1) { transition-delay: 0.1s; }
+.mobile-nav-links li:nth-child(2) { transition-delay: 0.15s; }
+.mobile-nav-links li:nth-child(3) { transition-delay: 0.2s; }
+.mobile-nav-links li:nth-child(4) { transition-delay: 0.25s; }
+.mobile-nav-links li:nth-child(5) { transition-delay: 0.3s; }
+
 .mobile-nav-links .nav-link {
-  font-size: 1.5rem;
-  font-weight: 500;
+  font-size: 1.8rem;
+  font-weight: 600;
+  font-family: 'Tektur', monospace;
+  display: inline-block;
+  padding: 0.5rem 1.5rem;
+  border-radius: 50px;
+  transition: var(--transition);
+}
+
+.mobile-nav-links .nav-link:hover {
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .mobile-actions {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
   align-items: center;
+  width: 100%;
+  max-width: 280px;
 }
 
 .mobile-actions .waitlist-btn {
-  padding: 0.75rem 1.5rem;
-  font-size: 1.1rem;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  width: 100%;
+  justify-content: center;
+  font-family: 'Tektur', monospace;
+  font-weight: 600;
+}
+
+.close-menu {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 2rem;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: var(--transition);
+}
+
+.close-menu:hover {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 /* Responsive styles */
@@ -231,6 +309,10 @@
   .navbar-container {
     padding: 1rem;
     justify-content: space-between;
+  }
+  
+  .navbar-container.scrolled {
+    padding: 0.5rem 1rem;
   }
   
   .links-bubble {
@@ -242,7 +324,11 @@
   }
   
   .logo-text {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+  }
+  
+  .logo-bubble {
+    padding: 0.6rem 1.2rem;
   }
   
   .hamburger-container {
@@ -254,8 +340,89 @@
   }
 }
 
-@media (min-width: 1025px) {
-  .mobile-menu {
-    display: none !important;
+@media (max-width: 640px) {
+  .navbar-container {
+    padding: 0.8rem;
+  }
+  
+  .logo-text {
+    font-size: 1.1rem;
+  }
+  
+  .logo-bubble {
+    padding: 0.5rem 1rem;
+  }
+  
+  .hamburger-bubble {
+    padding: 0.6rem;
+  }
+  
+  .hamburger {
+    width: 36px;
+    height: 36px;
+    font-size: 1.3rem;
+  }
+  
+  .mobile-nav-links .nav-link {
+    font-size: 1.5rem;
+  }
+  
+  .mobile-actions .waitlist-btn {
+    padding: 0.9rem 1.8rem;
+    font-size: 1.1rem;
+  }
+  
+  .close-menu {
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 45px;
+    height: 45px;
+    font-size: 1.8rem;
   }
 }
+
+@media (max-width: 400px) {
+  .logo-text {
+    font-size: 1rem;
+  }
+  
+  .mobile-nav-links .nav-link {
+    font-size: 1.3rem;
+    padding: 0.4rem 1.2rem;
+  }
+  
+  .mobile-actions .waitlist-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+/* Animation for menu items */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Improve focus states for accessibility */
+.nav-link:focus,
+.waitlist-btn:focus,
+.hamburger:focus,
+.close-menu:focus {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+} 

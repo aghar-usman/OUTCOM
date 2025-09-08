@@ -1,22 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Tektur:wght@400;500;600;700&display=swap');
-
-:root {
-  --primary-dark: #0F1117;
-  --text-primary: #FFFFFF;
-  --text-secondary: #A1A1AA;
-  --accent-primary: #6366F1;
-  --accent-secondary: #818CF8;
-  --card-bg: rgba(255, 255, 255, 0.03);
-  --card-border: rgba(255, 255, 255, 0.08);
-  --glow-intensity: 0.15;
-  --border-radius: 16px;
-  --transition-timing: cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-duration: 0.4s;
-  --font-heading: 'Tektur', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
 /* Proof Section */
 .proof-section {
   padding: 8rem 2rem;
@@ -25,6 +6,7 @@
   overflow: hidden;
   isolation: isolate;
   font-family: var(--font-body);
+  transition: all 0.8s var(--transition-timing);
 }
 
 .proof-container {
@@ -191,7 +173,7 @@
   opacity: 0.8;
 }
 
-/* Background effects */
+/* Proof Background effects */
 .proof-background {
   position: absolute;
   top: 0;
@@ -250,6 +232,145 @@
   z-index: 1;
 }
 
+/* Call Section */
+.call-section {
+  position: relative;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: var(--primary-dark);
+  color: var(--text-primary);
+  padding: 4rem 2rem;
+  font-family: var(--font-body);
+  isolation: isolate;
+  transition: all 0.8s var(--transition-timing);
+}
+
+.call-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.call-grid {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(55, 65, 81, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(55, 65, 81, 0.15) 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: center center;
+  opacity: 0.5;
+}
+
+.call-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, rgba(99, 102, 241, 0) 70%);
+  border-radius: 50%;
+  filter: blur(60px);
+  z-index: 0;
+  animation: callGlowPulse 10s ease-in-out infinite;
+}
+
+.call-content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: callFadeInUp 0.8s ease-out forwards;
+}
+
+.call-headline {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
+  font-family: var(--font-heading);
+}
+
+.call-gradient-text {
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-tertiary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.call-subtext {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  margin-bottom: 2.5rem;
+  max-width: 600px;
+  line-height: 1.6;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+.call-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2.5rem;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-tertiary));
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  font-family: var(--font-body);
+  letter-spacing: 0.02em;
+  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+}
+
+.call-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
+}
+
+.call-button:active {
+  transform: translateY(0);
+  box-shadow: 0 5px 20px rgba(99, 102, 241, 0.3);
+}
+
+.call-button-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.call-button:hover .call-button-glow {
+  transform: translateX(100%);
+}
+
 /* Animation keyframes */
 @keyframes fadeInUp {
   from {
@@ -273,10 +394,48 @@
   }
 }
 
+@keyframes callGlowPulse {
+  0%, 100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes callFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Section Transition Animation */
+.section-transition {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s var(--transition-timing);
+}
+
+.section-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* Responsive design */
 @media (max-width: 1200px) {
   .proof-carousel {
     max-width: 800px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .call-headline {
+    font-size: 2.5rem;
   }
 }
 
@@ -299,11 +458,24 @@
     padding: 6rem 1.5rem;
   }
   
+  .call-section {
+    min-height: 50vh;
+    padding: 3rem 1.5rem;
+  }
+  
   .proof-title {
     font-size: 2.25rem;
   }
   
   .proof-subtext {
+    font-size: 1.1rem;
+  }
+  
+  .call-headline {
+    font-size: 2rem;
+  }
+  
+  .call-subtext {
     font-size: 1.1rem;
   }
   
@@ -318,6 +490,11 @@
   .proof-glow {
     width: 400px;
     height: 400px;
+  }
+  
+  .call-button {
+    padding: 0.9rem 2rem;
+    font-size: 1rem;
   }
 }
 
@@ -353,8 +530,20 @@
     padding: 4rem 1rem;
   }
   
+  .call-section {
+    padding: 2rem 1rem;
+  }
+  
   .proof-header {
     margin-bottom: 3rem;
+  }
+  
+  .call-headline {
+    font-size: 1.8rem;
+  }
+  
+  .call-subtext {
+    font-size: 1rem;
   }
   
   .testimonial-card {
@@ -368,6 +557,16 @@
   .quote-icon svg {
     width: 24px;
     height: 24px;
+  }
+  
+  .call-button {
+    padding: 0.8rem 1.8rem;
+    font-size: 0.95rem;
+  }
+  
+  .call-glow {
+    width: 300px;
+    height: 300px;
   }
 }
 
@@ -387,6 +586,12 @@
   }
   
   .proof-header {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+  
+  .call-content {
     animation: none !important;
     opacity: 1;
     transform: none;

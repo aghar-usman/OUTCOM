@@ -1,21 +1,42 @@
 // Hero.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Hero.css';
 
 const Hero = () => {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const heroRef = useRef(null);
+
+  useEffect(() => {
+    // Initialize particle animation
+    const initParticles = () => {
+      const container = heroRef.current;
+      if (!container) return;
+      
+      // Create particles
+      for (let i = 0; i < 30; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'hero-particle';
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.top = `${Math.random() * 100}%`;
+        particle.style.width = `${Math.random() * 4 + 2}px`;
+        particle.style.height = particle.style.width;
+        particle.style.animationDelay = `${Math.random() * 5}s`;
+        container.querySelector('.hero-background').appendChild(particle);
+      }
+    };
+
+    initParticles();
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (email) {
-      // In a real app, you would send this to your backend
       console.log('Email submitted:', email);
       setSubmitted(true);
     }
   };
 
-  // Function to scroll to CTA section
   const scrollToCTA = () => {
     const ctaSection = document.getElementById('Cta');
     if (ctaSection) {
@@ -24,10 +45,11 @@ const Hero = () => {
   };
 
   return (
-    <div className="hero-container">
+    <div className="hero-container" ref={heroRef}>
       <div className="hero-background">
         <div className="hero-grid"></div>
         <div className="hero-glow"></div>
+        <div className="hero-particles"></div>
       </div>
       
       <div className="hero-content">
@@ -78,48 +100,49 @@ const Hero = () => {
       </div>
       
       <div className="hero-visual">
-        <div className="floating-element element-1">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 16V12M12 8H12.01M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="#6366F1" strokeWidth="2" strokeLinecap="round"/>
-          </svg>
-        </div>
-        
-        <div className="floating-element element-2">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="#6366F1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M9 22V12H15V22" stroke="#6366F1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </div>
-        
-        <div className="floating-element element-3">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M21 12C21 13.1819 20.7672 14.3522 20.3149 15.4442C19.8626 16.5361 19.1997 17.5282 18.364 18.364C17.5282 19.1997 16.5361 19.8626 15.4442 20.3149C14.3522 20.7672 13.1819 21 12 21C10.8181 21 9.64778 20.7672 8.55585 20.3149C7.46392 19.8626 6.47177 19.1997 5.63604 18.364C4.80031 17.5282 4.13738 16.5361 3.68508 15.4442C3.23279 14.3522 3 13.1819 3 12C3 9.61305 3.94821 7.32387 5.63604 5.63604C7.32387 3.94821 9.61305 3 12 3C14.3869 3 16.6761 3.94821 18.364 5.63604C20.0518 7.32387 21 9.61305 21 12Z" stroke="#6366F1" strokeWidth="2"/>
-            <path d="M15 12L10.5 10V14L15 12Z" fill="#6366F1"/>
-          </svg>
-        </div>
-        
-        <div className="floating-element element-4">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#6366F1" strokeWidth="2" strokeLinecap="round"/>
-          </svg>
-        </div>
-        
-        <div className="connection-dots">
-          <div className="dot-row">
-            <div className="dot"></div>
-            <div className="dot"></div>
-            <div className="dot"></div>
-            <div className="dot"></div>
-            <div className="dot"></div>
-          </div>
-          <div className="dot-row">
-            <div className="dot"></div>
-            <div className="dot"></div>
-            <div className="dot"></div>
-            <div className="dot"></div>
-            <div className="dot"></div>
+        {/* AI Core Visualization */}
+        <div className="ai-core-container">
+          <div className="ai-core">
+            <div className="core-inner-glow"></div>
+            <div className="core-inner-ring">
+              <div className="core-center"></div>
+            </div>
+            <div className="core-orbits">
+              <div className="core-orbit core-orbit-1">
+                <div className="orbit-particle orbit-particle-1"></div>
+                <div className="orbit-particle orbit-particle-2"></div>
+                <div className="orbit-particle orbit-particle-3"></div>
+                <div className="orbit-particle orbit-particle-4"></div>
+              </div>
+              <div className="core-orbit core-orbit-2">
+                <div className="orbit-particle orbit-particle-1"></div>
+                <div className="orbit-particle orbit-particle-2"></div>
+                <div className="orbit-particle orbit-particle-3"></div>
+                <div className="orbit-particle orbit-particle-4"></div>
+              </div>
+            </div>
           </div>
         </div>
+        
+        {/* Data Nodes */}
+        <div className="data-node node-1">
+          <div className="node-inner-glow"></div>
+        </div>
+        <div className="data-node node-2">
+          <div className="node-inner-glow"></div>
+        </div>
+        <div className="data-node node-3">
+          <div className="node-inner-glow"></div>
+        </div>
+        <div className="data-node node-4">
+          <div className="node-inner-glow"></div>
+        </div>
+        
+        {/* Connection Lines */}
+        <div className="connection-line line-1"></div>
+        <div className="connection-line line-2"></div>
+        <div className="connection-line line-3"></div>
+        <div className="connection-line line-4"></div>
       </div>
     </div>
   );
