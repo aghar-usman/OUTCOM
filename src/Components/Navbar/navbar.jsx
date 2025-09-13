@@ -36,15 +36,15 @@ const Navbar = () => {
   return (
     <>
       <nav className={`navbar-container ${isScrolled ? 'scrolled' : ''}`}>
-        {/* Left Bubble - Logo */}
-        <div className="nav-bubble logo-bubble">
+        {/* Left Section - Logo */}
+        <div className="logo-container">
           <NavLink to="/" className="logo-link">
             <h1 className='logo-text'>Outcom.ai</h1>
           </NavLink>
         </div>
 
-        {/* Middle Bubble - Navigation (Desktop) */}
-        <div className="nav-bubble links-bubble">
+        {/* Middle Section - Navigation (Desktop) */}
+        <div className="nav-links-container">
           <ul className="nav-links">
             <li>
               <NavLink to="/" className="nav-link" end>
@@ -61,16 +61,11 @@ const Navbar = () => {
                 Careers
               </NavLink>
             </li>
-            <li>
-              <NavLink to="/about" className="nav-link" end>
-                About Us
-              </NavLink>
-            </li>
           </ul>
         </div>
 
-        {/* Right Bubble - Actions (Desktop) */}
-        <div className="nav-bubble actions-bubble">
+        {/* Right Section - Actions (Desktop) */}
+        <div className="actions-container">
           <button className="waitlist-btn" onClick={handleWaitlistClick}>
             <span className="notify-icon">🔔</span>
             Join Waitlist
@@ -79,65 +74,58 @@ const Navbar = () => {
 
         {/* Hamburger Menu Button (Mobile) */}
         <div className="hamburger-container">
-          <div className="nav-bubble hamburger-bubble">
-            <button className="hamburger" onClick={toggleMenu}>
-              {isMenuOpen ? '✕' : '☰'}
-            </button>
-          </div>
+          <button 
+            className={`hamburger ${isMenuOpen ? 'active' : ''}`} 
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
+          >
+            <span className="hamburger-line"></span>
+            <span className="hamburger-line"></span>
+            <span className="hamburger-line"></span>
+          </button>
         </div>
       </nav>
 
       {/* Mobile Menu */}
       <div className={`mobile-menu ${isMenuOpen ? 'active' : ''}`}>
-        <button className="mobile-close-btn" onClick={toggleMenu}>
-          ✕
-        </button>
-        <ul className="mobile-nav-links">
-          <li>
-            <NavLink 
-              to="/" 
-              className="nav-link" 
-              end 
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink 
-              to="/blog" 
-              className="nav-link" 
-              end 
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Blog
-            </NavLink>
-          </li>
-          <li>
-            <NavLink 
-              to="/career" 
-              className="nav-link" 
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Careers
-            </NavLink>
-          </li>
-          <li>
-            <NavLink 
-              to="/about" 
-              className="nav-link" 
-              end 
-              onClick={() => setIsMenuOpen(false)}
-            >
-              About Us
-            </NavLink>
-          </li>
-        </ul>
-        <div className="mobile-actions">
-          <button className="waitlist-btn" onClick={handleWaitlistClick}>
-            <span className="notify-icon">🔔</span>
-            Join Waitlist
-          </button>
+        <div className="mobile-menu-content">
+          <ul className="mobile-nav-links">
+            <li>
+              <NavLink 
+                to="/" 
+                className="nav-link" 
+                end 
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink 
+                to="/blog" 
+                className="nav-link" 
+                end 
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Blog
+              </NavLink>
+            </li>
+            <li>
+              <NavLink 
+                to="/career" 
+                className="nav-link" 
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Careers
+              </NavLink>
+            </li>
+          </ul>
+          <div className="mobile-actions">
+            <button className="waitlist-btn" onClick={handleWaitlistClick}>
+              <span className="notify-icon">🔔</span>
+              Join Waitlist
+            </button>
+          </div>
         </div>
       </div>
     </>

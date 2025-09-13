@@ -19,7 +19,7 @@ const Call = () => {
         </p>
         
         <button className="call-button">
-          Join the Waitlist
+          🔔 Join  Waitlist
           <span className="call-button-glow"></span>
         </button>
       </div>

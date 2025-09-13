@@ -1,16 +1,15 @@
-/* Proof Section */
+/* Proof Section - Enhanced */
 .proof-section {
-  padding: 8rem 2rem;
+  padding: 2rem 1.5rem;
   position: relative;
   background-color: var(--primary-dark);
   overflow: hidden;
   isolation: isolate;
   font-family: var(--font-body);
-  transition: all 0.8s var(--transition-timing);
 }
 
 .proof-container {
-  max-width: 1280px;
+  max-width: 1200px;
   margin: 0 auto;
   position: relative;
   z-index: 2;
@@ -19,7 +18,7 @@
 .proof-header {
   text-align: center;
   max-width: 800px;
-  margin: 0 auto 5rem;
+  margin: 0 auto 4rem;
   opacity: 0;
   transform: translateY(30px);
   animation: fadeInUp 1s var(--transition-timing) forwards;
@@ -27,9 +26,9 @@
 }
 
 .proof-title {
-  font-size: 3rem;
-  font-weight: 800;
-  margin-bottom: 1.5rem;
+  font-size: 2.75rem;
+  font-weight: 500;
+  margin-bottom: 1.25rem;
   line-height: 1.15;
   letter-spacing: -0.03em;
   background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
@@ -40,10 +39,12 @@
 }
 
 .proof-subtext {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   color: var(--text-secondary);
   line-height: 1.7;
   font-weight: 400;
+  max-width: 90%;
+  margin: 0 auto;
   font-family: var(--font-body);
 }
 
@@ -51,6 +52,7 @@
   position: relative;
   max-width: 1000px;
   margin: 0 auto;
+  z-index: 3;
 }
 
 .carousel-content {
@@ -78,11 +80,30 @@
   transform: translateX(100%);
   transition: all var(--transition-duration) var(--transition-timing);
   backdrop-filter: blur(12px);
+  overflow: hidden;
+  z-index: 1; /* Added z-index */
+}
+
+.testimonial-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.03) 0%, rgba(129, 140, 248, 0.03) 100%);
+  z-index: 1;
 }
 
 .testimonial-card.active {
   opacity: 1;
   transform: translateX(0);
+  z-index: 3; /* Increased z-index for active card */
+}
+
+.testimonial-card.prev {
+  transform: translateX(-100%);
+  opacity: 0;
   z-index: 2;
 }
 
@@ -90,30 +111,36 @@
   transform: translateY(-8px) scale(1.02);
   border-color: rgba(99, 102, 241, 0.4);
   box-shadow: 
-    0 25px 50px rgba(0, 0, 0, 0.25),
+    0 20px 40px rgba(0, 0, 0, 0.25),
     0 0 0 1px rgba(99, 102, 241, 0.1);
 }
 
 .quote-icon {
   margin-bottom: 2rem;
   color: var(--accent-primary);
+  position: relative;
+  z-index: 2;
 }
 
 .testimonial-quote {
-  font-size: 1.5rem;
-  font-weight: 500;
+  font-size: 1.3rem;
+  font-weight: 400;
   color: var(--text-primary);
   line-height: 1.6;
   margin-bottom: 1.5rem;
   font-style: italic;
   font-family: var(--font-body);
+  position: relative;
+  z-index: 2;
 }
 
 .testimonial-attribution {
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 300;
   color: var(--accent-primary);
   font-family: var(--font-heading);
+  position: relative;
+  z-index: 2;
 }
 
 .carousel-controls {
@@ -122,6 +149,8 @@
   align-items: center;
   margin-top: 2rem;
   gap: 1.5rem;
+  position: relative;
+  z-index: 3;
 }
 
 .carousel-button {
@@ -136,6 +165,8 @@
   cursor: pointer;
   transition: all 0.3s ease;
   color: var(--text-primary);
+  position: relative;
+  z-index: 2;
 }
 
 .carousel-button:hover {
@@ -149,6 +180,8 @@
 .carousel-indicators {
   display: flex;
   gap: 0.75rem;
+  position: relative;
+  z-index: 2;
 }
 
 .indicator {
@@ -173,7 +206,7 @@
   opacity: 0.8;
 }
 
-/* Proof Background effects */
+/* Enhanced Background effects */
 .proof-background {
   position: absolute;
   top: 0;
@@ -184,6 +217,20 @@
   overflow: hidden;
 }
 
+/* Grid background */
+.proof-grid-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(99, 102, 241, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99, 102, 241, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: center center;
+  opacity: 0.3;
+  animation: gridMove 20s linear infinite;
+}
+
 .proof-glow {
   position: absolute;
   top: 50%;
@@ -191,15 +238,67 @@
   transform: translate(-50%, -50%);
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, 
-    rgba(99, 102, 241, 0.1) 0%, 
-    rgba(99, 102, 241, 0.05) 40%,
-    rgba(99, 102, 241, 0) 70%);
+  background: 
+    radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(99, 102, 241, 0.05) 40%, rgba(99, 102, 241, 0) 70%),
+    radial-gradient(circle at 30% 30%, rgba(129, 140, 248, 0.1) 0%, transparent 40%),
+    radial-gradient(circle at 70% 70%, rgba(139, 92, 246, 0.08) 0%, transparent 40%);
   border-radius: 50%;
   filter: blur(80px);
   z-index: 0;
   animation: featuresGlowPulse 10s ease-in-out infinite;
   will-change: transform, opacity;
+}
+
+/* Floating particles */
+.proof-particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.proof-particle {
+  position: absolute;
+  background: rgba(99, 102, 241, 0.3);
+  border-radius: 50%;
+  animation: particleFloat 20s infinite ease-in-out;
+  z-index: 1;
+}
+
+.proof-particle:nth-child(1) {
+  width: 6px;
+  height: 6px;
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+  background: rgba(129, 140, 248, 0.4);
+}
+
+.proof-particle:nth-child(2) {
+  width: 8px;
+  height: 8px;
+  top: 60%;
+  left: 80%;
+  animation-delay: 5s;
+  background: rgba(139, 92, 246, 0.3);
+}
+
+.proof-particle:nth-child(3) {
+  width: 4px;
+  height: 4px;
+  top: 40%;
+  left: 25%;
+  animation-delay: 10s;
+}
+
+.proof-particle:nth-child(4) {
+  width: 7px;
+  height: 7px;
+  top: 70%;
+  left: 40%;
+  animation-delay: 15s;
+  background: rgba(129, 140, 248, 0.4);
 }
 
 .proof-section::before {
@@ -232,145 +331,6 @@
   z-index: 1;
 }
 
-/* Call Section */
-.call-section {
-  position: relative;
-  min-height: 60vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background-color: var(--primary-dark);
-  color: var(--text-primary);
-  padding: 4rem 2rem;
-  font-family: var(--font-body);
-  isolation: isolate;
-  transition: all 0.8s var(--transition-timing);
-}
-
-.call-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-}
-
-.call-grid {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    linear-gradient(rgba(55, 65, 81, 0.15) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(55, 65, 81, 0.15) 1px, transparent 1px);
-  background-size: 50px 50px;
-  background-position: center center;
-  opacity: 0.5;
-}
-
-.call-glow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, rgba(99, 102, 241, 0) 70%);
-  border-radius: 50%;
-  filter: blur(60px);
-  z-index: 0;
-  animation: callGlowPulse 10s ease-in-out infinite;
-}
-
-.call-content {
-  position: relative;
-  z-index: 3;
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  animation: callFadeInUp 0.8s ease-out forwards;
-}
-
-.call-headline {
-  font-size: 3rem;
-  font-weight: 800;
-  line-height: 1.1;
-  margin-bottom: 1.5rem;
-  background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: -0.02em;
-  font-family: var(--font-heading);
-}
-
-.call-gradient-text {
-  background: linear-gradient(90deg, var(--accent-primary), var(--accent-tertiary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.call-subtext {
-  font-size: 1.25rem;
-  color: var(--text-secondary);
-  margin-bottom: 2.5rem;
-  max-width: 600px;
-  line-height: 1.6;
-  font-weight: 400;
-  letter-spacing: 0.01em;
-}
-
-.call-button {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem 2.5rem;
-  background: linear-gradient(90deg, var(--accent-primary), var(--accent-tertiary));
-  color: var(--text-primary);
-  font-size: 1.1rem;
-  font-weight: 600;
-  border: none;
-  border-radius: 100px;
-  cursor: pointer;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  font-family: var(--font-body);
-  letter-spacing: 0.02em;
-  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
-}
-
-.call-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
-}
-
-.call-button:active {
-  transform: translateY(0);
-  box-shadow: 0 5px 20px rgba(99, 102, 241, 0.3);
-}
-
-.call-button-glow {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transform: translateX(-100%);
-  transition: transform 0.6s ease;
-}
-
-.call-button:hover .call-button-glow {
-  transform: translateX(100%);
-}
-
 /* Animation keyframes */
 @keyframes fadeInUp {
   from {
@@ -380,6 +340,15 @@
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes gridMove {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 50px 50px;
   }
 }
 
@@ -394,47 +363,40 @@
   }
 }
 
-@keyframes callGlowPulse {
+@keyframes particleFloat {
   0%, 100% {
-    opacity: 0.7;
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translateY(-40px) translateX(20px) scale(1.1);
+    opacity: 0.6;
   }
   50% {
-    opacity: 0.4;
+    transform: translateY(-60px) translateX(-25px) scale(1.05);
+    opacity: 0.8;
   }
-}
-
-@keyframes callFadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  75% {
+    transform: translateY(-30px) translateX(-15px) scale(1.15);
+    opacity: 0.5;
   }
 }
 
 /* Section Transition Animation */
-.section-transition {
+.proof-section.section-transition {
   opacity: 0;
   transform: translateY(50px);
   transition: all 0.8s var(--transition-timing);
 }
 
-.section-visible {
+.proof-section.section-visible {
   opacity: 1;
   transform: translateY(0);
 }
 
 /* Responsive design */
-@media (max-width: 1200px) {
-  .proof-carousel {
-    max-width: 800px;
-  }
-}
-
 @media (max-width: 1024px) {
-  .call-headline {
+  .proof-title {
     font-size: 2.5rem;
   }
 }
@@ -455,12 +417,11 @@
 
 @media (max-width: 768px) {
   .proof-section {
-    padding: 6rem 1.5rem;
+    padding: 4rem 1.25rem;
   }
   
-  .call-section {
-    min-height: 50vh;
-    padding: 3rem 1.5rem;
+  .proof-header {
+    margin-bottom: 3rem;
   }
   
   .proof-title {
@@ -469,14 +430,7 @@
   
   .proof-subtext {
     font-size: 1.1rem;
-  }
-  
-  .call-headline {
-    font-size: 2rem;
-  }
-  
-  .call-subtext {
-    font-size: 1.1rem;
+    max-width: 100%;
   }
   
   .testimonial-card {
@@ -491,11 +445,6 @@
     width: 400px;
     height: 400px;
   }
-  
-  .call-button {
-    padding: 0.9rem 2rem;
-    font-size: 1rem;
-  }
 }
 
 @media (max-width: 640px) {
@@ -504,7 +453,7 @@
   }
   
   .proof-subtext {
-    font-size: 1rem;
+    font-size: 1.05rem;
   }
   
   .testimonial-card {
@@ -515,10 +464,6 @@
     font-size: 1.1rem;
   }
   
-  .testimonial-attribution {
-    font-size: 1rem;
-  }
-  
   .carousel-button {
     width: 40px;
     height: 40px;
@@ -527,23 +472,11 @@
 
 @media (max-width: 480px) {
   .proof-section {
-    padding: 4rem 1rem;
-  }
-  
-  .call-section {
-    padding: 2rem 1rem;
+    padding: 3rem 1rem;
   }
   
   .proof-header {
-    margin-bottom: 3rem;
-  }
-  
-  .call-headline {
-    font-size: 1.8rem;
-  }
-  
-  .call-subtext {
-    font-size: 1rem;
+    margin-bottom: 2.5rem;
   }
   
   .testimonial-card {
@@ -559,12 +492,7 @@
     height: 24px;
   }
   
-  .call-button {
-    padding: 0.8rem 1.8rem;
-    font-size: 0.95rem;
-  }
-  
-  .call-glow {
+  .proof-glow {
     width: 300px;
     height: 300px;
   }
@@ -591,8 +519,21 @@
     transform: none;
   }
   
-  .call-content {
+  .proof-grid-bg {
     animation: none !important;
+  }
+  
+  .proof-glow {
+    animation: none !important;
+  }
+  
+  .proof-particle {
+    animation: none !important;
+    opacity: 0.2;
+  }
+  
+  .proof-section.section-transition {
+    transition: none !important;
     opacity: 1;
     transform: none;
   }

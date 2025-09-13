@@ -37,6 +37,18 @@ const Proof = () => {
 
   return (
     <section className="proof-section">
+      {/* Background elements */}
+      <div className="proof-background">
+        <div className="proof-grid-bg"></div>
+        <div className="proof-glow"></div>
+        <div className="proof-particles">
+          <div className="proof-particle"></div>
+          <div className="proof-particle"></div>
+          <div className="proof-particle"></div>
+          <div className="proof-particle"></div>
+        </div>
+      </div>
+      
       <div className="proof-container">
         <div className="proof-header">
           <h2 className="proof-title">Early Voices</h2>

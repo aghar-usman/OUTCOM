@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Tektur:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
   --text-primary: #ffffff;
@@ -6,9 +7,15 @@
   --accent-primary: #6366f1;
   --accent-secondary: #8b5cf6;
   --white: #ffffff;
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.16), 0 2px 4px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
   --radius-sm: 8px;
+  --radius-md: 12px;
   --transition: all 0.3s ease;
 }
 
@@ -18,45 +25,93 @@
   box-sizing: border-box;
 }
 
-.navbar-container {
-  display: flex;
-  justify-content: space-between;
+/* Unified Waitlist Button Styles */
+.waitlist-btn, .join-waitlist-btn {
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  color: white;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  letter-spacing: 0.02em;
+  position: relative;
+  overflow: hidden;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.95rem;
+}
+
+.waitlist-btn::before, .join-waitlist-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: 0.5s;
+}
+
+.waitlist-btn:hover, .join-waitlist-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
+}
+
+.waitlist-btn:hover::before, .join-waitlist-btn:hover::before {
+  left: 100%;
+}
+
+.waitlist-btn:focus, .join-waitlist-btn:focus {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+/* Size variations for different contexts */
+.waitlist-btn.small {
+  padding: 0.5rem 1.25rem;
+  font-size: 0.9rem;
+}
+
+.waitlist-btn.large, .join-waitlist-btn {
   padding: 1rem 2rem;
+  font-size: 1.1rem;
+  border-radius: 12px;
+}
+
+/* Navbar Container */
+.navbar-container {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 1rem 5%;
   position: fixed;
   width: 100%;
   top: 0;
   z-index: 10000;
-  gap: 1rem;
   background-color: transparent;
   transition: var(--transition);
+  backdrop-filter: blur(0px);
 }
 
 .navbar-container.scrolled {
-  padding: 0.75rem 2rem;
+  padding: 0.75rem 5%;
   background-color: rgba(17, 24, 39, 0.95);
   backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-sm);
 }
 
-.nav-bubble {
-  background-color: rgba(31, 41, 55, 0.6);
-  backdrop-filter: blur(10px);
-  border-radius: 50px;
-  padding: 0.6rem 1.5rem;
-  box-shadow: var(--shadow-sm);
+/* Logo Section */
+.logo-container {
   display: flex;
   align-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: var(--transition);
-}
-
-.nav-bubble:hover {
-  border-color: rgba(99, 102, 241, 0.3);
-  box-shadow: var(--shadow-md);
-}
-
-.logo-bubble {
-  margin-right: auto;
+  justify-self: start;
 }
 
 .logo-link {
@@ -68,7 +123,7 @@
 
 .logo-text {
   color: var(--text-primary);
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: 700;
   margin: 0;
   white-space: nowrap;
@@ -80,18 +135,29 @@
   letter-spacing: -0.5px;
 }
 
-.links-bubble {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+/* Navigation Links */
+.nav-links-container {
+  display: flex;
+  justify-content: center;
 }
 
 .nav-links {
   display: flex;
   list-style: none;
-  gap: 1.5rem;
+  gap: 2rem;
   margin: 0;
   padding: 0;
+  background: rgba(31, 41, 55, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 50px;
+  padding: 0.6rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: var(--transition);
+}
+
+.nav-links:hover {
+  border-color: rgba(99, 102, 241, 0.3);
+  box-shadow: var(--shadow-md);
 }
 
 .nav-link {
@@ -103,8 +169,7 @@
   padding: 0.5rem 0;
   position: relative;
   white-space: nowrap;
-  font-family: 'Tektur', monospace;
-  letter-spacing: -0.3px;
+  font-family: 'Inter', sans-serif;
 }
 
 .nav-link:hover {
@@ -126,28 +191,31 @@
   width: 100%;
 }
 
-.actions-bubble {
-  margin-left: auto;
+/* Actions Section */
+.actions-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   gap: 1rem;
+  justify-self: end;
 }
 
-.waitlist-btn {
+ .waitlist-btn {
   background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
   color: var(--white);
-  padding: 0.5rem 1.25rem;
-  border-radius: 50px;
+  padding: 0.6rem 1.5rem !important;
+  border-radius: 8px;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 500;
   transition: var(--transition);
-  font-size: 0.95rem;
-  font-family: 'Tektur', monospace;
+  font-size: 0.95rem !important;
+  font-family: 'Inter', sans-serif;
   border: none;
   cursor: pointer;
   box-shadow: var(--shadow-sm);
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  letter-spacing: -0.3px;
 }
 
 .waitlist-btn:hover {
@@ -171,33 +239,48 @@
 /* Mobile menu styles */
 .hamburger-container {
   display: none;
-}
-
-.hamburger-bubble {
-  padding: 0.75rem;
-  background-color: rgba(31, 41, 55, 0.6);
-  backdrop-filter: blur(10px);
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  justify-self: end;
 }
 
 .hamburger {
   background: none;
   border: none;
-  color: var(--text-primary);
-  font-size: 1.5rem;
   cursor: pointer;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 24px;
+  position: relative;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--radius-sm);
-  transition: var(--transition);
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0;
+  z-index: 10001;
+  background: rgba(31, 41, 55, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  padding: 5px;
 }
 
-.hamburger:hover {
-  background: rgba(99, 102, 241, 0.1);
+.hamburger-line {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background-color: var(--text-primary);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+.hamburger.active .hamburger-line:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.active .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active .hamburger-line:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 .mobile-menu {
@@ -208,20 +291,36 @@
   height: 100vh;
   background: rgba(17, 24, 39, 0.98);
   backdrop-filter: blur(10px);
-  z-index: 999;
+  z-index: 9999;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   opacity: 0;
   visibility: hidden;
-  transition: var(--transition);
-  padding: 2rem;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  transform: translateY(-20px);
 }
 
 .mobile-menu.active {
   opacity: 1;
   visibility: visible;
+  transform: translateY(0);
+}
+
+.mobile-menu-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 2rem;
+  transform: scale(0.95);
+  transition: transform 0.4s ease;
+}
+
+.mobile-menu.active .mobile-menu-content {
+  transform: scale(1);
 }
 
 .mobile-nav-links {
@@ -247,21 +346,22 @@
 .mobile-nav-links li:nth-child(1) { transition-delay: 0.1s; }
 .mobile-nav-links li:nth-child(2) { transition-delay: 0.15s; }
 .mobile-nav-links li:nth-child(3) { transition-delay: 0.2s; }
-.mobile-nav-links li:nth-child(4) { transition-delay: 0.25s; }
-.mobile-nav-links li:nth-child(5) { transition-delay: 0.3s; }
 
 .mobile-nav-links .nav-link {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  font-family: 'Tektur', monospace;
+  font-family: 'Inter', sans-serif;
   display: inline-block;
-  padding: 0.5rem 1.5rem;
+  padding: 0.75rem 2rem;
   border-radius: 50px;
-  transition: var(--transition);
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 250px;
 }
 
 .mobile-nav-links .nav-link:hover {
   background: rgba(255, 255, 255, 0.05);
+  transform: translateX(10px);
 }
 
 .mobile-actions {
@@ -271,129 +371,103 @@
   align-items: center;
   width: 100%;
   max-width: 280px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease 0.25s;
+}
+
+.mobile-menu.active .mobile-actions {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .mobile-actions .waitlist-btn {
   padding: 1rem 2rem;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   width: 100%;
   justify-content: center;
-  font-family: 'Tektur', monospace;
+  font-family: 'Inter', sans-serif;
   font-weight: 600;
-}
-
-.close-menu {
-  position: absolute;
-  top: 2rem;
-  right: 2rem;
-  background: none;
-  border: none;
-  color: var(--text-primary);
-  font-size: 2rem;
-  cursor: pointer;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  transition: var(--transition);
-}
-
-.close-menu:hover {
-  background: rgba(255, 255, 255, 0.1);
 }
 
 /* Responsive styles */
 @media (max-width: 1024px) {
   .navbar-container {
-    padding: 1rem;
-    justify-content: space-between;
+    padding: 1rem 4%;
+    grid-template-columns: 1fr auto;
   }
   
   .navbar-container.scrolled {
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 4%;
   }
   
-  .links-bubble {
+  .nav-links-container {
     display: none;
   }
   
-  .actions-bubble {
+  .actions-container {
     display: none;
   }
   
   .logo-text {
     font-size: 1.3rem;
-  }
-  
-  .logo-bubble {
-    padding: 0.6rem 1.2rem;
   }
   
   .hamburger-container {
-    display: block;
-  }
-  
-  .logo-bubble {
-    margin-right: 0;
+    display: flex;
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .navbar-container {
-    padding: 0.8rem;
+    padding: 1rem;
+  }
+  
+  .navbar-container.scrolled {
+    padding: 0.75rem 1rem;
   }
   
   .logo-text {
-    font-size: 1.1rem;
-  }
-  
-  .logo-bubble {
-    padding: 0.5rem 1rem;
-  }
-  
-  .hamburger-bubble {
-    padding: 0.6rem;
-  }
-  
-  .hamburger {
-    width: 36px;
-    height: 36px;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
   
   .mobile-nav-links .nav-link {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
+    padding: 0.6rem 1.5rem;
   }
   
   .mobile-actions .waitlist-btn {
     padding: 0.9rem 1.8rem;
-    font-size: 1.1rem;
-  }
-  
-  .close-menu {
-    top: 1.5rem;
-    right: 1.5rem;
-    width: 45px;
-    height: 45px;
-    font-size: 1.8rem;
+    font-size: 1rem;
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 480px) {
   .logo-text {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
   
   .mobile-nav-links .nav-link {
-    font-size: 1.3rem;
-    padding: 0.4rem 1.2rem;
+    font-size: 1.2rem;
+    padding: 0.5rem 1.2rem;
   }
   
   .mobile-actions .waitlist-btn {
     padding: 0.8rem 1.5rem;
-    font-size: 1rem;
+    font-size: 0.95rem;
+  }
+  
+  .hamburger {
+    width: 26px;
+    height: 20px;
+  }
+  
+  .hamburger.active .hamburger-line:nth-child(1) {
+    transform: translateY(5px) rotate(45deg);
+  }
+  
+  .hamburger.active .hamburger-line:nth-child(3) {
+    transform: translateY(-5px) rotate(-45deg);
   }
 }
 
@@ -412,8 +486,7 @@
 /* Improve focus states for accessibility */
 .nav-link:focus,
 .waitlist-btn:focus,
-.hamburger:focus,
-.close-menu:focus {
+.hamburger:focus {
   outline: 2px solid var(--accent-primary);
   outline-offset: 2px;
 }
@@ -425,4 +498,16 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-} 
+  
+  .mobile-menu {
+    transition: none;
+  }
+  
+  .mobile-nav-links li {
+    transition: none;
+  }
+  
+  .mobile-actions {
+    transition: none;
+  }
+}

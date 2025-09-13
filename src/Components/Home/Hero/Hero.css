@@ -1,18 +1,26 @@
-/* Hero.css - Enhanced Version */
-@import url('https://fonts.googleapis.com/css2?family=Tektur:wght@400;500;600;700;800;900&display=swap');
+
+@import url('https://fonts.cdnfonts.com/css/satoshi');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tektur:wght@400;500;600;700&display=swap');
 
 :root {
   --primary-dark: #0F1117;
+  --primary-darker: #0A0C12;
   --text-primary: #FFFFFF;
-  --text-secondary: #A1A1AA;
+  --text-secondary: #E4E4E7;
+  --text-tertiary: #A1A1AA;
   --accent-primary: #6366F1;
   --accent-secondary: #818CF8;
   --accent-tertiary: #8B5CF6;
+  --accent-quaternary: #A78BFA;
   --card-bg: rgba(255, 255, 255, 0.03);
+  --card-bg-hover: rgba(255, 255, 255, 0.06);
   --accent-gradient: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  --accent-gradient-vertical: linear-gradient(180deg, var(--accent-primary), var(--accent-tertiary));
   --success-color: #10B981;
   --error-red: #EF4444;
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 * {
@@ -26,6 +34,7 @@ body {
   background-color: var(--primary-dark);
   color: var(--text-primary);
   overflow-x: hidden;
+  line-height: 1.6;
 }
 
 .hero-container {
@@ -35,7 +44,7 @@ body {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding: 70px 2rem 0;
+  padding: 80px 2rem 0;
   isolation: isolate;
 }
 
@@ -102,6 +111,14 @@ body {
 }
 
 /* Floating particles */
+.hero-particles-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
 .hero-particle {
   position: absolute;
   background: rgba(99, 102, 241, 0.4);
@@ -110,21 +127,74 @@ body {
   z-index: 1;
 }
 
+/* Create multiple particles with different properties */
+.hero-particle:nth-child(1) {
+  width: 6px;
+  height: 6px;
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+  background: rgba(129, 140, 248, 0.5);
+}
+
+.hero-particle:nth-child(2) {
+  width: 8px;
+  height: 8px;
+  top: 60%;
+  left: 80%;
+  animation-delay: 2s;
+  background: rgba(139, 92, 246, 0.4);
+}
+
+.hero-particle:nth-child(3) {
+  width: 4px;
+  height: 4px;
+  top: 40%;
+  left: 25%;
+  animation-delay: 4s;
+}
+
+.hero-particle:nth-child(4) {
+  width: 7px;
+  height: 7px;
+  top: 70%;
+  left: 40%;
+  animation-delay: 6s;
+  background: rgba(129, 140, 248, 0.5);
+}
+
+.hero-particle:nth-child(5) {
+  width: 5px;
+  height: 5px;
+  top: 30%;
+  left: 65%;
+  animation-delay: 8s;
+}
+
+.hero-particle:nth-child(6) {
+  width: 9px;
+  height: 9px;
+  top: 80%;
+  left: 15%;
+  animation-delay: 10s;
+  background: rgba(139, 92, 246, 0.4);
+}
+
 @keyframes particleFloat {
   0%, 100% {
-    transform: translateY(0) translateX(0);
+    transform: translateY(0) translateX(0) scale(1);
     opacity: 0.4;
   }
   25% {
-    transform: translateY(-20px) translateX(10px);
+    transform: translateY(-30px) translateX(15px) scale(1.1);
     opacity: 0.7;
   }
   50% {
-    transform: translateY(-35px) translateX(-15px);
+    transform: translateY(-50px) translateX(-20px) scale(1.05);
     opacity: 0.9;
   }
   75% {
-    transform: translateY(-15px) translateX(-5px);
+    transform: translateY(-20px) translateX(-10px) scale(1.15);
     opacity: 0.6;
   }
 }
@@ -151,7 +221,7 @@ body {
   padding: 0.7rem 1.4rem;
   border-radius: 100px;
   font-size: 0.95rem;
-  font-weight: 600;
+  font-weight: 500;
   margin-bottom: 2.5rem;
   border: 1px solid rgba(99, 102, 241, 0.3);
   backdrop-filter: blur(10px);
@@ -160,6 +230,13 @@ body {
   box-shadow: 0 0 25px rgba(99, 102, 241, 0.2);
   animation: fadeInUp 0.8s ease-out 0.1s forwards;
   opacity: 0;
+  transition: var(--transition-smooth);
+}
+
+.coming-soon-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 35px rgba(99, 102, 241, 0.3);
+  background: linear-gradient(90deg, rgba(99, 102, 241, 0.25), rgba(139, 92, 246, 0.25));
 }
 
 .badge-pulse {
@@ -173,7 +250,7 @@ body {
 
 .hero-headline {
   font-size: 3.8rem;
-  font-weight: 800;
+  font-weight: 500;
   line-height: 1.1;
   margin-bottom: 1.5rem;
   background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
@@ -181,26 +258,34 @@ body {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   letter-spacing: -0.02em;
-  font-family: 'Tektur', sans-serif;
+  font-family: 'Tektur', cursive;
   text-shadow: 0 4px 30px rgba(255, 255, 255, 0.15);
   animation: fadeInUp 0.8s ease-out 0.2s forwards;
   opacity: 0;
 }
 
 .gradient-text {
-  background: linear-gradient(90deg, var(--accent-primary), var(--accent-tertiary));
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-tertiary), var(--accent-quaternary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  animation: gradientShift 8s ease infinite;
+  background-size: 200% auto;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .hero-subtext {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: var(--text-secondary);
   margin-bottom: 2.5rem;
   max-width: 650px;
   line-height: 1.6;
-  font-weight: 400;
+  font-weight: 300;
   letter-spacing: 0.01em;
   animation: fadeInUp 0.8s ease-out 0.3s forwards;
   opacity: 0;
@@ -210,24 +295,28 @@ body {
   margin-bottom: 2rem;
   animation: fadeInUp 0.8s ease-out 0.4s forwards;
   opacity: 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .input-group {
   display: flex;
   max-width: 500px;
+  width: 100%;
   margin: 0 auto;
   background: rgba(31, 41, 55, 0.7);
   border-radius: 14px;
   overflow: hidden;
   border: 1px solid rgba(99, 102, 241, 0.4);
   backdrop-filter: blur(12px);
-  transition: all 0.3s ease;
+  transition: var(--transition-bounce);
   box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
 }
 
 .input-group:focus-within {
   border-color: rgba(99, 102, 241, 0.9);
-  box-shadow: 0 15px 35px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 15px 35px rgba(99, 102, 241, 0.3), 0 0 0 4px rgba(99, 102, 241, 0.1);
   transform: translateY(-3px);
 }
 
@@ -240,6 +329,7 @@ body {
   font-size: 1.05rem;
   outline: none;
   font-family: inherit;
+  transition: var(--transition-smooth);
 }
 
 .input-group input:focus {
@@ -249,48 +339,12 @@ body {
 .input-group input::placeholder {
   color: var(--text-secondary);
   opacity: 0.8;
+  transition: var(--transition-smooth);
 }
 
-.cta-primary {
-  background: var(--accent-gradient);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  padding: 1.2rem 2rem;
-  font-size: 1.05rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-  box-shadow: 0 5px 20px rgba(99, 102, 241, 0.4);
-  position: relative;
-  overflow: hidden;
-  font-family: inherit;
-}
-
-.cta-primary::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: 0.5s;
-}
-
-.cta-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
-}
-
-.cta-primary:hover::before {
-  left: 100%;
-}
-
-.cta-primary:focus {
-  outline: 2px solid white;
-  outline-offset: 2px;
+.input-group input:focus::placeholder {
+  opacity: 0.5;
+  transform: translateX(5px);
 }
 
 .success-message {
@@ -304,8 +358,10 @@ body {
   padding: 1.2rem 1.8rem;
   margin-bottom: 2rem;
   color: var(--success-color);
-  font-weight: 500;
+  font-weight: 300;
   animation: fadeIn 0.5s ease-out;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 5px 15px rgba(16, 185, 129, 0.1);
 }
 
 .success-message svg {
@@ -318,6 +374,7 @@ body {
   line-height: 1.6;
   animation: fadeInUp 0.8s ease-out 0.5s forwards;
   opacity: 0;
+  max-width: 500px;
 }
 
 .cta-link {
@@ -325,13 +382,14 @@ body {
   border: none;
   color: var(--accent-secondary);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 300;
   cursor: pointer;
   padding: 0;
   margin-top: 0.5rem;
   font-size: inherit;
   position: relative;
   font-family: inherit;
+  transition: var(--transition-smooth);
 }
 
 .cta-link::after {
@@ -343,6 +401,10 @@ body {
   height: 1px;
   background: var(--accent-secondary);
   transition: width 0.3s ease;
+}
+
+.cta-link:hover {
+  color: var(--accent-primary);
 }
 
 .cta-link:hover::after {
@@ -361,7 +423,7 @@ body {
   opacity: 0;
 }
 
-/* AI Core Visualization */
+/* Enhanced AI Core Visualization */
 .ai-core-container {
   position: absolute;
   top: 50%;
@@ -371,8 +433,8 @@ body {
 }
 
 .ai-core {
-  width: 160px;
-  height: 160px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   background: rgba(15, 17, 23, 0.9);
   border: 1px solid rgba(99, 102, 241, 0.5);
@@ -385,6 +447,47 @@ body {
     inset 0 0 40px rgba(99, 102, 241, 0.15);
   position: relative;
   overflow: hidden;
+  transition: var(--transition-smooth);
+}
+
+.ai-core:hover {
+  box-shadow: 
+    0 0 90px rgba(99, 102, 241, 0.6),
+    inset 0 0 50px rgba(99, 102, 241, 0.2);
+  transform: scale(1.02);
+}
+
+.core-orbits {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.core-orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 50%;
+}
+
+.core-orbit-1 {
+  width: 180px;
+  height: 180px;
+  animation: rotate 15s linear infinite reverse;
+}
+
+.core-orbit-2 {
+  width: 220px;
+  height: 220px;
+  animation: rotate 20s linear infinite;
+}
+
+.core-orbit-3 {
+  width: 260px;
+  height: 260px;
+  animation: rotate 25s linear infinite reverse;
 }
 
 .core-inner-glow {
@@ -432,67 +535,13 @@ body {
   z-index: 2;
 }
 
-.core-orbits {
+/* Data Nodes */
+.data-nodes {
   position: absolute;
   width: 100%;
   height: 100%;
 }
 
-.core-orbit {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: 1px solid rgba(99, 102, 241, 0.3);
-  border-radius: 50%;
-}
-
-.core-orbit-1 {
-  width: 180px;
-  height: 180px;
-  animation: rotate 15s linear infinite reverse;
-}
-
-.core-orbit-2 {
-  width: 200px;
-  height: 200px;
-  animation: rotate 20s linear infinite;
-}
-
-.orbit-particle {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--accent-primary);
-  box-shadow: 0 0 12px var(--accent-primary);
-}
-
-.orbit-particle-1 {
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.orbit-particle-2 {
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.orbit-particle-3 {
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.orbit-particle-4 {
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-/* Data Nodes */
 .data-node {
   position: absolute;
   width: 28px;
@@ -507,6 +556,12 @@ body {
   box-shadow: 0 0 25px rgba(99, 102, 241, 0.5);
   z-index: 2;
   animation: dataNodeFloat 8s ease-in-out infinite;
+  transition: var(--transition-smooth);
+}
+
+.data-node:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 35px rgba(99, 102, 241, 0.7);
 }
 
 .node-inner-glow {
@@ -542,6 +597,12 @@ body {
 }
 
 /* Connection Lines */
+.connection-lines {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
 .connection-line {
   position: absolute;
   height: 2px;
@@ -581,6 +642,59 @@ body {
   width: 30%;
   transform: rotate(45deg);
   animation: connectionPulse 3s infinite 1.5s;
+}
+
+/* Energy Particles */
+.energy-particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.energy-particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  box-shadow: 0 0 10px var(--accent-primary);
+  animation: energyPulse 4s infinite;
+}
+
+.particle-1 {
+  top: 15%;
+  left: 50%;
+  animation-delay: 0s;
+}
+
+.particle-2 {
+  top: 50%;
+  right: 15%;
+  animation-delay: 0.7s;
+}
+
+.particle-3 {
+  bottom: 15%;
+  left: 50%;
+  animation-delay: 1.4s;
+}
+
+.particle-4 {
+  top: 50%;
+  left: 15%;
+  animation-delay: 2.1s;
+}
+
+.particle-5 {
+  top: 30%;
+  right: 30%;
+  animation-delay: 2.8s;
+}
+
+.particle-6 {
+  bottom: 30%;
+  left: 30%;
+  animation-delay: 3.5s;
 }
 
 /* Animations */
@@ -689,15 +803,150 @@ body {
   }
 }
 
-/* Responsive design improvements */
+@keyframes energyPulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+}
+
+/* Enhanced Unified Waitlist Button Styles */
+.waitlist-btn, .join-waitlist-btn {
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition-bounce);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4), 0 0 0 0 rgba(99, 102, 241, 0.5);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  letter-spacing: 0.02em;
+  position: relative;
+  overflow: hidden;
+  padding: 0.6rem 1.5rem !important;
+  font-size: 0.95rem !important;
+}
+
+.waitlist-btn::before, .join-waitlist-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: 0.5s;
+}
+
+.waitlist-btn:hover, .join-waitlist-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5), 0 0 0 6px rgba(99, 102, 241, 0.15);
+}
+
+.waitlist-btn:hover::before, .join-waitlist-btn:hover::before {
+  left: 100%;
+}
+
+.waitlist-btn:active, .join-waitlist-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+}
+
+.waitlist-btn:focus, .join-waitlist-btn:focus {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+/* Size variations for different contexts */
+.waitlist-btn.small {
+  padding: 0.6rem 1.5rem;
+  font-size: 0.9rem;
+}
+
+.waitlist-btn.large, .join-waitlist-btn {
+  padding: 1.1rem 2.2rem;
+  font-size: 1.1rem;
+  border-radius: 14px;
+}
+
+/* Improve focus states for accessibility */
+.waitlist-btn:focus,
+.join-waitlist-btn:focus {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+}
+
+/* Add this to your existing Hero.css */
+.join-waitlist-btn {
+  font-size: 1.2rem;
+  padding: 1rem 2.5rem;
+  border-radius: 14px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+/* Loading state for buttons */
+.waitlist-btn.loading, .join-waitlist-btn.loading {
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.waitlist-btn.loading::after, .join-waitlist-btn.loading::after {
+  content: '';
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: buttonSpin 1s linear infinite;
+  margin-left: 8px;
+}
+
+@keyframes buttonSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .waitlist-btn, .join-waitlist-btn {
+    transition: none;
+  }
+  
+  .waitlist-btn::before, .join-waitlist-btn::before {
+    transition: none;
+  }
+  
+  .waitlist-btn:hover, .join-waitlist-btn:hover {
+    transform: none;
+  }
+}
+
+/* Enhanced responsive design */
 @media (max-width: 1024px) {
   .hero-headline {
-    font-size: 3rem;
+    font-size: 3.2rem;
   }
   
   .ai-core {
-    width: 140px;
-    height: 140px;
+    width: 180px;
+    height: 180px;
   }
   
   .core-inner-ring {
@@ -716,8 +965,13 @@ body {
   }
   
   .core-orbit-2 {
-    width: 180px;
-    height: 180px;
+    width: 200px;
+    height: 200px;
+  }
+  
+  .core-orbit-3 {
+    width: 240px;
+    height: 240px;
   }
 }
 
@@ -727,7 +981,8 @@ body {
   }
   
   .hero-subtext {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
+    padding: 0 1rem;
   }
   
   .input-group {
@@ -746,8 +1001,8 @@ body {
   }
   
   .ai-core {
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
   }
   
   .core-inner-ring {
@@ -766,8 +1021,13 @@ body {
   }
   
   .core-orbit-2 {
-    width: 160px;
-    height: 160px;
+    width: 170px;
+    height: 170px;
+  }
+  
+  .core-orbit-3 {
+    width: 200px;
+    height: 200px;
   }
   
   .data-node {
@@ -784,6 +1044,11 @@ body {
     width: 550px;
     height: 550px;
   }
+  
+  .join-waitlist-btn {
+    font-size: 1.1rem;
+    padding: 1rem 2rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -793,10 +1058,11 @@ body {
   
   .hero-headline {
     font-size: 2rem;
+    line-height: 1.2;
   }
   
   .hero-subtext {
-    font-size: 1.05rem;
+    font-size: 1rem;
     padding: 0 0.5rem;
   }
   
@@ -814,9 +1080,13 @@ body {
     max-width: 300px;
   }
   
+  .input-group input {
+    padding: 1rem 1.5rem;
+  }
+  
   .ai-core {
-    width: 100px;
-    height: 100px;
+    width: 130px;
+    height: 130px;
   }
   
   .core-inner-ring {
@@ -835,8 +1105,13 @@ body {
   }
   
   .core-orbit-2 {
-    width: 140px;
-    height: 140px;
+    width: 150px;
+    height: 150px;
+  }
+  
+  .core-orbit-3 {
+    width: 180px;
+    height: 180px;
   }
   
   .data-node {
@@ -847,5 +1122,40 @@ body {
   .node-inner-glow {
     width: 8px;
     height: 8px;
+  }
+  
+  .join-waitlist-btn {
+    font-size: 1rem;
+    padding: 0.9rem 1.8rem;
+  }
+  
+  .success-message {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.8rem;
+    padding: 1rem;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --text-secondary: #FFFFFF;
+    --accent-primary: #4F46E5;
+  }
+  
+  .hero-grid {
+    opacity: 0.9;
+  }
+  
+  .input-group {
+    border-width: 2px;
+  }
+}
+
+/* Dark mode tweaks (though we're already dark) */
+@media (prefers-color-scheme: dark) {
+  .input-group {
+    background: rgba(15, 23, 42, 0.7);
   }
 }

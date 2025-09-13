@@ -20,7 +20,7 @@
 /* Solution Section */
 .solution-container {
   position: relative;
-  padding: 8rem 2rem;
+  padding: 0.5rem 2rem;
   background-color: var(--primary-dark);
   color: var(--text-primary);
   font-family: var(--font-body);
@@ -53,7 +53,7 @@
 
 .solution-title {
   font-size: 3rem;
-  font-weight: 800;
+  font-weight: 500;
   margin-bottom: 1.75rem;
   line-height: 1.15;
   letter-spacing: -0.03em;
@@ -68,7 +68,7 @@
   font-size: 1.25rem;
   color: var(--text-secondary);
   line-height: 1.7;
-  font-weight: 400;
+  font-weight: 300;
   max-width: 90%;
   font-family: var(--font-body);
 }
@@ -146,7 +146,7 @@
 .solution-stat-percentage {
   display: inline-block;
   font-size: 2.25rem;
-  font-weight: 800;
+  font-weight: 500;
   background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
   -webkit-background-clip: text;
   background-clip: text;
@@ -157,7 +157,7 @@
 
 .solution-card-title {
   font-size: 1.35rem;
-  font-weight: 700;
+  font-weight: 500;
   margin: 0.5rem 0;
   color: var(--text-primary);
   line-height: 1.3;
