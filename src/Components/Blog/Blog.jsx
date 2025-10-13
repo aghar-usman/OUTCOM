@@ -7,8 +7,7 @@ export const Blog = () => {
   return (
     <div className="Blog-page">
       <section id="hero"> <Hero /></section>
-      <section id="BlogList"> <BlogList /></section> 
-      <section id="categories"> <Categories /></section>
+      <section id="BlogList"> <BlogList /></section>
     
 
 
