@@ -1,14 +1,9 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import './BlogList.css';
 
 const BlogList = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [showAll, setShowAll] = useState(false);
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const carouselRef = useRef(null);
-  const intervalRef = useRef(null);
-  const [slidesPerView, setSlidesPerView] = useState(5);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
   // Sample blog data
   const blogPosts = [
@@ -68,20 +63,9 @@ const BlogList = () => {
     }
   ];
 
-  // Calculate slides per view based on window width
-  const getSlidesPerView = useCallback(() => {
-    if (typeof window === 'undefined') return 5;
-    if (window.innerWidth < 480) return 1;
-    if (window.innerWidth < 640) return 2;
-    if (window.innerWidth < 1024) return 3;
-    if (window.innerWidth < 1280) return 4;
-    return 5;
-  }, []);
-
   // Initialize component
   useEffect(() => {
     setIsVisible(true);
-    setSlidesPerView(getSlidesPerView());
     
     // Create particles
     const particlesContainer = document.querySelector('.blog-list-particles');
@@ -109,69 +93,10 @@ const BlogList = () => {
         card.style.setProperty('--y', `${y}%`);
       });
     });
-
-    // Start auto rotation
-    startAutoRotation();
-
-    // Handle window resize
-    const handleResize = () => {
-      setSlidesPerView(getSlidesPerView());
-    };
-
-    window.addEventListener('resize', handleResize);
-    
-    // Cleanup on component unmount
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [getSlidesPerView]);
-
-  // Auto rotation functions
-  const startAutoRotation = useCallback(() => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-    }
-    
-    setIsAutoPlaying(true);
-    intervalRef.current = setInterval(() => {
-      setCurrentSlide(prev => (prev + 1) % 3); // Only cycle through 3 positions
-    }, 3000);
   }, []);
-
-  const stopAutoRotation = useCallback(() => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
-      setIsAutoPlaying(false);
-    }
-  }, []);
-
-  // Navigation functions
-  const handleDotClick = useCallback((index) => {
-    setCurrentSlide(index);
-    startAutoRotation();
-  }, [startAutoRotation]);
-
-  const handleNext = useCallback(() => {
-    setCurrentSlide(prev => (prev + 1) % 3); // Only cycle through 3 positions
-    startAutoRotation();
-  }, [startAutoRotation]);
-
-  const handlePrev = useCallback(() => {
-    setCurrentSlide(prev => (prev - 1 + 3) % 3); // Only cycle through 3 positions
-    startAutoRotation();
-  }, [startAutoRotation]);
 
   const toggleShowAll = () => {
     setShowAll(!showAll);
-    if (!showAll) {
-      stopAutoRotation();
-    } else {
-      startAutoRotation();
-    }
   };
 
   // Determine which posts to show based on state
@@ -197,87 +122,7 @@ const BlogList = () => {
           </p>
         </header>
 
-        {/* Carousel Section */}
-        <div className="blog-carousel-wrapper">
-          <div className="blog-carousel-header">
-            <h2 className="blog-carousel-title">Featured Articles</h2>
-            <div className="blog-carousel-status">
-              {isAutoPlaying ? 'Auto' : 'Paused'}
-            </div>
-          </div>
-          
-          <div 
-            className="blog-carousel"
-            ref={carouselRef}
-            onMouseEnter={stopAutoRotation}
-            onMouseLeave={startAutoRotation}
-          >
-            <div className="blog-carousel-track-wrapper">
-              <div 
-                className="blog-carousel-track" 
-                style={{ 
-                  transform: `translateX(-${currentSlide * (100 / slidesPerView)}%)`,
-                  width: `${(blogPosts.length / slidesPerView) * 100}%`
-                }}
-              >
-                {blogPosts.map((post) => ( // Keep all 6 posts
-                  <div key={post.id} className="blog-carousel-slide" style={{ flex: `0 0 ${100 / slidesPerView}%` }}>
-                    <article className="blog-card">
-                      <div className="blog-card-hover-effect"></div>
-                      <div className="blog-card-image">
-                        <img src={post.image} alt={post.title} />
-                        <div className="blog-card-category">{post.category}</div>
-                      </div>
-                      <div className="blog-card-content">
-                        <h2 className="blog-card-title">{post.title}</h2>
-                        <p className="blog-card-excerpt">{post.excerpt}</p>
-                        <div className="blog-card-meta">
-                          <span className="blog-card-date">{post.date}</span>
-                          <span className="blog-card-read-time">{post.readTime}</span>
-                        </div>
-                      </div>
-                      <div className="blog-card-actions">
-                        <a href="#" className="blog-card-read-btn">Read Article</a>
-                        <button className="blog-card-bookmark-btn">
-                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5 5C5 3.89543 5.89543 3 7 3H17C18.1046 3 19 3.89543 19 5V21L12 17.5L5 21V5Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                          </svg>
-                        </button>
-                      </div>
-                    </article>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-          
-          <div className="blog-carousel-controls-bottom">
-            <button className="blog-carousel-prev-bottom" onClick={handlePrev}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
-            
-            <div className="blog-carousel-dots">
-              {Array.from({ length: 3 }).map((_, index) => ( // Only 3 dots instead of 6
-                <button
-                  key={index}
-                  className={`blog-carousel-dot ${index === currentSlide ? 'active' : ''}`}
-                  onClick={() => handleDotClick(index)}
-                  aria-label={`Go to slide ${index + 1}`}
-                />
-              ))}
-            </div>
-            
-            <button className="blog-carousel-next-bottom" onClick={handleNext}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
-          </div>
-        </div>
-        
-        {/* Regular grid for remaining articles */}
+        {/* Regular grid for all articles */}
         <div className="blog-list-container">
           {visiblePosts.map((post, index) => (
             <article key={post.id} className="blog-card" style={{ animationDelay: `${index * 0.1}s` }}>
