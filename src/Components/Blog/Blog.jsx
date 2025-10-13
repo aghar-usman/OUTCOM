@@ -1,7 +1,7 @@
 import React from 'react';
 import Hero from './Hero/Hero';
 import BlogList from './BlogList/BlogList';
-import Categories from './Categories/Categories'
+
 
 export const Blog = () => {
   return (
