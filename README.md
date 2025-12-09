@@ -1,4 +1,4 @@
-# 🚀 Outcom.ai - Marketing Website Frontend
+# 🚀 Outcom.ai - Website Frontend
 
 A modern, responsive marketing website frontend for Outcom.ai featuring advanced animations, 3D graphics, and a component-based React architecture.
 
@@ -82,3 +82,4 @@ Backend integration underway using Flask/FastAPI with REST APIs for dynamic cont
 ---
 
 ⭐ **If you find this project interesting, feel free to star the repository!**
+
